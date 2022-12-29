@@ -1,7 +1,8 @@
 // CapyCity.cpp : Diese Datei enthält die Funktion "main". Hier beginnt und endet die Ausführung des Programms.
 //
 
-#include "iostream"
+#include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -153,6 +154,11 @@ int showMap()
 }
 int endProgram()
 {
+	for (int i = 0; i < width; ++i)
+	{
+		delete buildSpace[i];
+	}
+	delete buildSpace;
 	return -1;
 }
 
@@ -194,15 +200,16 @@ int menu()
 	}
 }
 
-int main()
+int main(int argc, char* argv[])
 {
-	do
-	{
-		cout << "Bitte länge des Baubereichs eingeben -> ";
-		cin >> length;
-		cout << "Bitte breite des Baubereichs eingeben -> ";
-		cin >> width;
-	} while (length < 1 || width < 1);
+	if (argc < 3) {
+		std::cout << "Bitte geben Sie Länge und Breite als Argumente an" << std::endl;
+		return 1;
+	}
+
+	length = std::stoi(argv[1]);
+	width = std::stoi(argv[2]);
+
 
 	buildSpace = new buildingType * [width];
 	for (int i = 0; i < width; ++i)
