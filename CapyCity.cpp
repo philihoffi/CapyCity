@@ -23,29 +23,87 @@ string printCharMultipleTimes(char c, int times)
     return s;
 }
 
-int menuUserInput()
+bool validBuildspace(int buildingWidth, int buildingLength, int posWidth, int posLength)
 {
-    cout << "+" << printCharMultipleTimes('-', 30) << '+' << endl;
-    cout << "|" << printCharMultipleTimes(' ', 30) << '|' << endl;
-    cout << "|" << printCharMultipleTimes(' ', 5) << "0 -> build Building" << printCharMultipleTimes(' ', 6) << '|' << endl;
-    cout << "|" << printCharMultipleTimes(' ', 5) << "1 -> delete Building" << printCharMultipleTimes(' ', 5) << '|' << endl;
-    cout << "|" << printCharMultipleTimes(' ', 5) << "2 -> show map" << printCharMultipleTimes(' ', 12) << '|' << endl;
-    cout << "|" << printCharMultipleTimes(' ', 5) << "3 -> end Program" << printCharMultipleTimes(' ', 9) << '|' << endl;
-    cout << "|" << printCharMultipleTimes(' ', 30) << '|' << endl;
-    cout << "|" << printCharMultipleTimes(' ', 12) << "input?" << printCharMultipleTimes(' ', 12) << '|' << endl;
-    cout << "+" << printCharMultipleTimes('-', 30) << '+' << endl;
-
-    int r = -1;
-    while (r < 0 || r > 3)
+    if (buildingWidth < 1 || buildingLength < 1 || posWidth < 0 || posLength < 0)
     {
-        cin >> r;
+        cout << "value was either too large or too smalll" << endl;
+        return false;
     }
-    return r;
+    if (buildingWidth + posWidth > width || buildingLength + posLength > length)
+    {
+        cout << "value was either too large or too small" << endl;
+        return false;
+    }
+    return true;
+}
+
+bool collidingWithOtherBuilding(int buildingWidth, int buildingLength, int posWidth, int posLength)
+{
+    for (int i = posWidth; i < width && buildingWidth > 0; i++, buildingWidth--)
+    {
+        int buildingLengthSave = buildingLength;
+        for (int j = posLength; j < length && buildingLength > 0; j++, buildingLength--)
+            if (buildSpace[i][j] != nix)
+            {
+                cout << "colliding with other Building" << endl;
+                return false;
+            }
+        buildingLength = buildingLengthSave;
+    }
+    return true;
+}
+
+bool validMaterial(char input)
+{
+    // TO-DO
+    return true;
+}
+
+void changeBuildSpace(int buildingWidth, int buildingLength, int posWidth, int posLength, buildingType buildType)
+{
+    for (int i = posWidth; i < width && buildingWidth > 0; i++, buildingWidth--)
+    {
+        int buildingLengthSave = buildingLength;
+        for (int j = posLength; j < length && buildingLength > 0; j++, buildingLength--)
+            buildSpace[i][j] = buildType;
+        buildingLength = buildingLengthSave;
+    }
 }
 
 int buildBuilding()
 {
-    // TO-DO
+    int buildingLength;
+    int buildingWidth;
+    int posWidth;
+    int posLength;
+    buildingType buildType;
+    do
+    {
+        cout << "exit = -1" << endl;
+        cout << "Bitte breite(Y) des Gebäudes eingeben -> ";
+        cin >> buildingWidth;
+        cout << "Bitte länge(X) des Gebäudes eingeben -> ";
+        cin >> buildingLength;
+        cout << "posY -> ";
+        cin >> posWidth;
+        cout << "posX -> ";
+        cin >> posLength;
+
+        if (buildingWidth == -1 || buildingLength == -1 || posWidth == -1 || posLength == -1)
+            return 1;
+
+    } while (!validBuildspace(buildingWidth, buildingLength, posWidth, posLength) || !collidingWithOtherBuilding(buildingWidth, buildingLength, posWidth, posLength));
+
+    char userInput;
+    do
+    {
+        cout << "Gebäudeart : haus = 'h' ";
+        cin >> userInput;
+    } while (!validMaterial(userInput));
+    buildType = (buildingType)userInput;
+    changeBuildSpace(buildingWidth, buildingLength, posWidth, posLength, buildType);
+
     return 1;
 }
 int deleteBuilding()
