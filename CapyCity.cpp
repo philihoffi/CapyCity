@@ -1,20 +1,99 @@
 // CapyCity.cpp : Diese Datei enthält die Funktion "main". Hier beginnt und endet die Ausführung des Programms.
 //
 
-#include <iostream>
+#include "iostream"
+
+using namespace std;
+
+enum buildingType
+{
+    nix,
+    ein,
+    zwe,
+    dre
+};
+
+string printCharMultipleTimes(char c, int times)
+{
+    string s = "";
+    for (int i = 0; i < times; ++i)
+        s += c;
+    return s;
+}
+
+int menuUserInput()
+{
+    cout << "+" << printCharMultipleTimes('-', 30) << '+' << endl;
+    cout << "|" << printCharMultipleTimes(' ', 30) << '|' << endl;
+    cout << "|" << printCharMultipleTimes(' ', 5) << "0 -> build Building" << printCharMultipleTimes(' ', 6) << '|' << endl;
+    cout << "|" << printCharMultipleTimes(' ', 5) << "1 -> delete Building" << printCharMultipleTimes(' ', 5) << '|' << endl;
+    cout << "|" << printCharMultipleTimes(' ', 5) << "2 -> show map" << printCharMultipleTimes(' ', 12) << '|' << endl;
+    cout << "|" << printCharMultipleTimes(' ', 5) << "3 -> end Program" << printCharMultipleTimes(' ', 9) << '|' << endl;
+    cout << "|" << printCharMultipleTimes(' ', 30) << '|' << endl;
+    cout << "|" << printCharMultipleTimes(' ', 12) << "input?" << printCharMultipleTimes(' ', 12) << '|' << endl;
+    cout << "+" << printCharMultipleTimes('-', 30) << '+' << endl;
+
+    int r = -1;
+    while (r < 0 || r > 3)
+    {
+        cin >> r;
+    }
+    return r;
+}
+
+int buildBuilding()
+{
+    // TO-DO
+}
+int deleteBuilding()
+{
+    // TO-DO
+}
+int showMap()
+{
+    // TO-DO
+}
+int endProgram()
+{
+    // TO-DO
+}
+
+void menu()
+{
+    switch (menuUserInput())
+    {
+    case 0:
+        buildBuilding();
+        break;
+    case 1:
+        deleteBuilding();
+        break;
+    case 2:
+        showMap();
+        break;
+    case 3:
+        endProgram();
+        break;
+    default:
+        cout << "HOW DID I GET HERE?" << endl;
+    }
+}
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    //ohne kommandozeilenargumente (einfacher zu debuggen)
+    int length;
+    int width;
+
+    cout << "Bitte länge des Baubereichs eingeben";
+    cin >> length;
+    cout << "Bitte breite des Baubereichs eingeben";
+    cin >> width;
+
+    buildingType** buildSpace = new buildingType * [width];
+    for (int i = 0; i < width; ++i)
+        buildSpace[i] = new buildingType[length];
+
+    menu();
+    return 1;
 }
-
-// Programm ausführen: STRG+F5 oder Menüeintrag "Debuggen" > "Starten ohne Debuggen starten"
-// Programm debuggen: F5 oder "Debuggen" > Menü "Debuggen starten"
-
-// Tipps für den Einstieg: 
-//   1. Verwenden Sie das Projektmappen-Explorer-Fenster zum Hinzufügen/Verwalten von Dateien.
-//   2. Verwenden Sie das Team Explorer-Fenster zum Herstellen einer Verbindung mit der Quellcodeverwaltung.
-//   3. Verwenden Sie das Ausgabefenster, um die Buildausgabe und andere Nachrichten anzuzeigen.
-//   4. Verwenden Sie das Fenster "Fehlerliste", um Fehler anzuzeigen.
-//   5. Wechseln Sie zu "Projekt" > "Neues Element hinzufügen", um neue Codedateien zu erstellen, bzw. zu "Projekt" > "Vorhandenes Element hinzufügen", um dem Projekt vorhandene Codedateien hinzuzufügen.
-//   6. Um dieses Projekt später erneut zu öffnen, wechseln Sie zu "Datei" > "Öffnen" > "Projekt", und wählen Sie die SLN-Datei aus.
