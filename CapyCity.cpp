@@ -7,11 +7,13 @@ using namespace std;
 
 enum buildingType
 {
-    nix,
-    ein,
-    zwe,
-    dre
+    nix = 'x',
+    haus = 'h'
 };
+
+buildingType **buildSpace;
+int length;
+int width;
 
 string printCharMultipleTimes(char c, int times)
 {
@@ -44,56 +46,97 @@ int menuUserInput()
 int buildBuilding()
 {
     // TO-DO
+    return 1;
 }
 int deleteBuilding()
 {
     // TO-DO
+    return 1;
 }
 int showMap()
 {
-    // TO-DO
+    cout << "+" << printCharMultipleTimes('-', length * 2 + 1) << '+' << endl;
+    for (int i = width - 1; i >= 0; i--)
+    {
+        cout << "| ";
+        for (int j = 0; j < length; j++)
+        {
+            cout << (char)buildSpace[i][j] << ' ';
+        }
+        cout << '|' << endl;
+    }
+    cout << "+" << printCharMultipleTimes('-', length * 2 + 1) << '+' << endl;
+    cout << "Legende einfügen WIP" << endl;
+
+    return 1;
 }
 int endProgram()
 {
-    // TO-DO
+    return -1;
 }
 
-void menu()
+int menu()
 {
-    switch (menuUserInput())
+    cout << "+" << printCharMultipleTimes('-', 30) << '+' << endl;
+    cout << "|" << printCharMultipleTimes(' ', 30) << '|' << endl;
+    cout << "|" << printCharMultipleTimes(' ', 5) << "0 -> build Building" << printCharMultipleTimes(' ', 6) << '|' << endl;
+    cout << "|" << printCharMultipleTimes(' ', 5) << "1 -> delete Building" << printCharMultipleTimes(' ', 5) << '|' << endl;
+    cout << "|" << printCharMultipleTimes(' ', 5) << "2 -> show map" << printCharMultipleTimes(' ', 12) << '|' << endl;
+    cout << "|" << printCharMultipleTimes(' ', 5) << "3 -> end Program" << printCharMultipleTimes(' ', 9) << '|' << endl;
+    cout << "|" << printCharMultipleTimes(' ', 30) << '|' << endl;
+    cout << "|" << printCharMultipleTimes(' ', 12) << "input?" << printCharMultipleTimes(' ', 12) << '|' << endl;
+    cout << "+" << printCharMultipleTimes('-', 30) << '+' << endl;
+
+    int menuUserInput = -1;
+    while (menuUserInput < 0 || menuUserInput > 3)
+    {
+        cin >> menuUserInput;
+    }
+
+    switch (menuUserInput)
     {
     case 0:
-        buildBuilding();
+        return buildBuilding();
         break;
     case 1:
-        deleteBuilding();
+        return deleteBuilding();
         break;
     case 2:
-        showMap();
+        return showMap();
         break;
     case 3:
-        endProgram();
+        return endProgram();
         break;
     default:
         cout << "HOW DID I GET HERE?" << endl;
+        return 1;
     }
 }
 
 int main()
 {
-    //ohne kommandozeilenargumente (einfacher zu debuggen)
-    int length;
-    int width;
+    do
+    {
+        cout << "Bitte länge des Baubereichs eingeben -> ";
+        cin >> length;
+        cout << "Bitte breite des Baubereichs eingeben -> ";
+        cin >> width;
+    } while (length < 1 || width < 1);
 
-    cout << "Bitte länge des Baubereichs eingeben";
-    cin >> length;
-    cout << "Bitte breite des Baubereichs eingeben";
-    cin >> width;
-
-    buildingType** buildSpace = new buildingType * [width];
+    buildSpace = new buildingType * [width];
     for (int i = 0; i < width; ++i)
+    {
         buildSpace[i] = new buildingType[length];
+        for (int j = 0; j < length; ++j)
+        {
+            buildSpace[i][j] = nix;
+        }
+    }
 
-    menu();
+    int end = 1;
+    while (end != -1)
+    {
+        end = menu();
+    }
     return 1;
 }
