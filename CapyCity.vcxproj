@@ -128,6 +128,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CapyCity.cpp" />
+    <ClCompile Include="CapycitySim.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CapycitySim.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

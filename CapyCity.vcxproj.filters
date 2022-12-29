@@ -18,5 +18,13 @@
     <ClCompile Include="CapyCity.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="CapycitySim.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CapycitySim.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
