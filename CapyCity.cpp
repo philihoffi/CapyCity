@@ -154,6 +154,11 @@ int showMap()
 }
 int endProgram()
 {
+	for (int i = 0; i < width; ++i)
+	{
+		delete buildSpace[i];
+	}
+	delete buildSpace;
 	return -1;
 }
 
