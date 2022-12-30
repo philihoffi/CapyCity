@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Headerdateien\Materials">
+      <UniqueIdentifier>{682cd915-514e-4ed2-aab7-0e71ce9fa804}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Materials">
+      <UniqueIdentifier>{6cb03b48-6379-4f96-8568-8ccc50492192}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Buildings">
+      <UniqueIdentifier>{3b9a6fd2-db65-4db6-b30e-64afc452887e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Buildings">
+      <UniqueIdentifier>{cb9faf1f-6a1c-4481-be80-395b6b5a60e1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CapyCity.cpp">
@@ -22,33 +34,39 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="Material.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Wood.cpp">
-      <Filter>Quelldateien</Filter>
+      <Filter>Quelldateien\Materials</Filter>
     </ClCompile>
     <ClCompile Include="Metal.cpp">
-      <Filter>Quelldateien</Filter>
+      <Filter>Quelldateien\Materials</Filter>
     </ClCompile>
     <ClCompile Include="Plactic.cpp">
-      <Filter>Quelldateien</Filter>
+      <Filter>Quelldateien\Materials</Filter>
+    </ClCompile>
+    <ClCompile Include="Wood.cpp">
+      <Filter>Quelldateien\Materials</Filter>
+    </ClCompile>
+    <ClCompile Include="Building.cpp">
+      <Filter>Quelldateien\Buildings</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CapycitySim.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="Material.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="Wood.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Metal.h">
-      <Filter>Headerdateien</Filter>
+      <Filter>Headerdateien\Materials</Filter>
     </ClInclude>
     <ClInclude Include="Plactic.h">
-      <Filter>Headerdateien</Filter>
+      <Filter>Headerdateien\Materials</Filter>
+    </ClInclude>
+    <ClInclude Include="Metal.h">
+      <Filter>Headerdateien\Materials</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>Headerdateien\Materials</Filter>
+    </ClInclude>
+    <ClInclude Include="Building.h">
+      <Filter>Headerdateien\Buildings</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

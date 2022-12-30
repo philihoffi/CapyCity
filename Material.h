@@ -1,11 +1,14 @@
 #pragma once
 class Material
 {
-public:
+private:
 	int price;
+public:
 	Material();
-	
-	void setPrice(int price);
 	int getPrice();
+
+protected:
+	void setPrice(int price);
+	
 };
 
