@@ -1,5 +1,6 @@
 #include "CapycitySim.h"
 #include <iostream>
+
 using namespace std;
 
 string CapycitySim::printCharMultipleTimes(char c, int times)
@@ -31,7 +32,7 @@ bool CapycitySim::collidingWithOtherBuilding(int buildingWidth, int buildingLeng
 	{
 		int buildingLengthSave = buildingLength;
 		for (int j = posLength; j < length && buildingLength > 0; j++, buildingLength--)
-			if (buildSpace[i][j] != nix)
+			if (buildSpace[i][j]->getLabel() != ' ')
 			{
 				cout << "colliding with other Building" << endl;
 				return false;
@@ -41,21 +42,24 @@ bool CapycitySim::collidingWithOtherBuilding(int buildingWidth, int buildingLeng
 	return true;
 }
 
-bool CapycitySim::validMaterial(char input)
+bool CapycitySim::validBuilding(char input)
 {
 	// TO-DO
 	return true;
 }
 
-void CapycitySim::changeBuildSpace(int buildingWidth, int buildingLength, int posWidth, int posLength, buildingType buildType)
+void CapycitySim::changeBuildSpace(int buildingWidth, int buildingLength, int posWidth, int posLength, Building* buildType)
 {
 	for (int i = posWidth; i < width && buildingWidth > 0; i++, buildingWidth--)
 	{
 		int buildingLengthSave = buildingLength;
-		for (int j = posLength; j < length && buildingLength > 0; j++, buildingLength--)
-			buildSpace[i][j] = buildType;
+		for (int j = posLength; j < length && buildingLength > 0; j++, buildingLength--) {
+			delete buildSpace[i][j];
+			buildSpace[i][j] = new Building(*buildType);
+		}
 		buildingLength = buildingLengthSave;
 	}
+	delete buildType;
 }
 
 int CapycitySim::buildBuilding()
@@ -64,7 +68,7 @@ int CapycitySim::buildBuilding()
 	int buildingWidth;
 	int posWidth;
 	int posLength;
-	buildingType buildType;
+	Building* buildType;
 	do
 	{
 		cout << "exit = -1" << endl;
@@ -83,12 +87,16 @@ int CapycitySim::buildBuilding()
 	} while (!validBuildspace(buildingWidth, buildingLength, posWidth, posLength) || !collidingWithOtherBuilding(buildingWidth, buildingLength, posWidth, posLength));
 
 	char userInput;
+	cout << "Gebäudeart :" << endl;
+	for (Building x : allBuildingTypes)
+		cout << x.getClassname() << ": " << (char)x.getLabel() << endl;
 	do
 	{
-		cout << "Gebäudeart : haus = 'h' ";
-		cin >> userInput;
-	} while (!validMaterial(userInput));
-	buildType = (buildingType)userInput;
+	cin >> userInput;
+	} while (!validBuilding(userInput));
+
+	//TO-DO use userinput
+	buildType = new Residential();
 	changeBuildSpace(buildingWidth, buildingLength, posWidth, posLength, buildType);
 
 	return 1;
@@ -117,7 +125,7 @@ int CapycitySim::deleteBuilding()
 			return 1;
 	} while (!validBuildspace(deletWidth, deletLength, posWidth, posLength));
 
-	changeBuildSpace(deletWidth, deletWidth, posWidth, posLength, nix);
+	changeBuildSpace(deletWidth, deletWidth, posWidth, posLength, new EmptySpace());
 
 	return 1;
 }
@@ -130,13 +138,15 @@ int CapycitySim::showMap()
 		cout << "| ";
 		for (int j = 0; j < length; j++)
 		{
-			cout << (char)buildSpace[i][j] << ' ';
+			cout << (char)buildSpace[i][j]->getLabel() << ' ';
 		}
 		cout << '|' << endl;
 	}
 	cout << "+" << printCharMultipleTimes('-', length * 2 + 1) << '+' << endl;
-	cout << "Legende einfügen WIP" << endl;
 
+
+	for (Building x : allBuildingTypes)
+		cout << x.getClassname() << ": " << (char)x.getLabel() << endl;
 	return 1;
 }
 
@@ -188,16 +198,24 @@ CapycitySim::CapycitySim(int length, int width)
 	this->length = length;
 	this->width = width;
 
-
-	buildSpace = new buildingType * [width];
-	for (int i = 0; i < width; ++i)
+	buildSpace = new Building * *[length];
+	for (int i = 0; i < length; i++)
 	{
-		buildSpace[i] = new buildingType[length];
-		for (int j = 0; j < length; ++j)
+		buildSpace[i] = new Building * [width];
+	}
+
+	for (int i = 0; i < length; i++)
+	{
+		for (int j = 0; j < width; j++)
 		{
-			buildSpace[i][j] = nix;
+			buildSpace[i][j] = new EmptySpace();
 		}
 	}
+
+	allBuildingTypes[0]= Building(*new EmptySpace());
+	allBuildingTypes[1] = Building(*new Windmill());
+	allBuildingTypes[2] = Building(*new Residential());
+
 }
 
 CapycitySim::~CapycitySim()

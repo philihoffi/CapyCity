@@ -1,23 +1,27 @@
 #pragma once
 #include <string>
+#include "Building.h"
+#include "EmptySpace.h"
+#include "Residential.h"
+#include "Windmill.h"
+
+
 using namespace std;
 class CapycitySim
 {
-	enum buildingType
-	{
-		nix = 'x',
-		haus = 'h'
-	};
+	
 private:
-	buildingType** buildSpace;
+	Building*** buildSpace;
 	int length;
 	int width;
+
+	Building allBuildingTypes[3];
 
 	string printCharMultipleTimes(char c, int times);
 	bool validBuildspace(int buildingWidth, int buildingLength, int posWidth, int posLength);
 	bool collidingWithOtherBuilding(int buildingWidth, int buildingLength, int posWidth, int posLength);
-	bool validMaterial(char input);
-	void changeBuildSpace(int buildingWidth, int buildingLength, int posWidth, int posLength, buildingType buildType);
+	bool validBuilding(char input);
+	void changeBuildSpace(int buildingWidth, int buildingLength, int posWidth, int posLength, Building* buildType);
 	int buildBuilding();
 	int deleteBuilding();
 	int showMap();

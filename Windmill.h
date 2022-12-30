@@ -3,6 +3,7 @@
 
 class Windmill :public Building
 {
+public:
 	Windmill();
 	~Windmill();
 };

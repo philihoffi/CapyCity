@@ -54,6 +54,9 @@
     <ClCompile Include="Windmill.cpp">
       <Filter>Quelldateien\Buildings</Filter>
     </ClCompile>
+    <ClCompile Include="EmptySpace.cpp">
+      <Filter>Quelldateien\Buildings</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CapycitySim.h">
@@ -78,6 +81,9 @@
       <Filter>Headerdateien\Buildings</Filter>
     </ClInclude>
     <ClInclude Include="Windmill.h">
+      <Filter>Headerdateien\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="EmptySpace.h">
       <Filter>Headerdateien\Buildings</Filter>
     </ClInclude>
   </ItemGroup>

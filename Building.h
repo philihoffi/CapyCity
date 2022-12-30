@@ -4,6 +4,7 @@
 #include "Wood.h"
 #include "Plactic.h"
 #include "Metal.h"
+#include <string>
 
 
 class Building
@@ -11,19 +12,26 @@ class Building
 private:
 	int baseprice;
 	char label;
+	std::string classname;
 	std::vector<Material> Materials;
 
 public:
 	int getPrice();
 	int getLabel();
+	std::string getClassname();
+
 	std::vector<Material> getMaterials();
 
-	Building(int baseprice,char label, std::vector<Material> Materials);
+	Building();
+	Building(int baseprice,char label, std::vector<Material> Materials, std::string classname);
 	~Building();
+
+	Building(Building& other);
 
 protected:
 	void setPrice(int price);
 	void setLabel(char label);
+	void setClassname(std::string classname);
 	void addMaterial(Material material);
 };
 
