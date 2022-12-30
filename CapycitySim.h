@@ -5,7 +5,7 @@ class CapycitySim
 {
 	enum buildingType
 	{
-		nix = 'x',
+		nix = nullptr,
 		haus = 'h'
 	};
 private:

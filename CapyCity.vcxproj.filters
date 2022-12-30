@@ -48,6 +48,12 @@
     <ClCompile Include="Building.cpp">
       <Filter>Quelldateien\Buildings</Filter>
     </ClCompile>
+    <ClCompile Include="Residential.cpp">
+      <Filter>Quelldateien\Buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="Windmill.cpp">
+      <Filter>Quelldateien\Buildings</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CapycitySim.h">
@@ -67,6 +73,12 @@
     </ClInclude>
     <ClInclude Include="Building.h">
       <Filter>Headerdateien\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="Residential.h">
+      <Filter>Headerdateien\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="Windmill.h">
+      <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

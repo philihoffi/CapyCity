@@ -1,6 +1,10 @@
 #pragma once
 #include <vector>
 #include "Material.h"
+#include "Wood.h"
+#include "Plactic.h"
+#include "Metal.h"
+
 
 class Building
 {

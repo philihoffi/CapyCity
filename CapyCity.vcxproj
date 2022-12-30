@@ -133,6 +133,8 @@
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="Metal.cpp" />
     <ClCompile Include="Plactic.cpp" />
+    <ClCompile Include="Residential.cpp" />
+    <ClCompile Include="Windmill.cpp" />
     <ClCompile Include="Wood.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -141,6 +143,8 @@
     <ClInclude Include="Material.h" />
     <ClInclude Include="Metal.h" />
     <ClInclude Include="Plactic.h" />
+    <ClInclude Include="Residential.h" />
+    <ClInclude Include="Windmill.h" />
     <ClInclude Include="Wood.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -2,39 +2,43 @@
 
 int Building::getPrice()
 {
-    return this->baseprice;
+	return this->baseprice;
 }
 
 int Building::getLabel()
 {
-    return this->label;
+	return this->label;
 }
 
 std::vector<Material> Building::getMaterials()
 {
-    return this->Materials;
+	return this->Materials;
 }
 
 Building::Building(int baseprice, char label, std::vector<Material> Materials)
 {
-    setLabel(label);
-    setPrice(baseprice);
+	setLabel(label);
+	setPrice(baseprice);
 
-    for (Material m : Materials)
-        addMaterial(m);
+	for (Material m : Materials)
+		addMaterial(m);
+}
+
+Building::~Building()
+{
 }
 
 void Building::setPrice(int price)
 {
-    this->baseprice = price;
+	this->baseprice = price;
 }
 
 void Building::setLabel(char label)
 {
-    this->label = label;
+	this->label = label;
 }
 
 void Building::addMaterial(Material material)
 {
-    this->Materials.push_back(material);
+	this->Materials.push_back(material);
 }
