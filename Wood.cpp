@@ -1,6 +1,5 @@
 #include "Wood.h"
 
-Wood::Wood()
+Wood::Wood():Material(50)
 {
-	setPrice(50);
 }

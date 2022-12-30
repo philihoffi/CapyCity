@@ -100,7 +100,6 @@ int CapycitySim::deleteBuilding()
 	int deletWidth;
 	int posWidth;
 	int posLength;
-	buildingType buildType;
 
 	do
 	{

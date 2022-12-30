@@ -78,7 +78,7 @@
       <Filter>Headerdateien\Buildings</Filter>
     </ClInclude>
     <ClInclude Include="Windmill.h">
-      <Filter>Headerdateien</Filter>
+      <Filter>Headerdateien\Buildings</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

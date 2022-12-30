@@ -1,6 +1,5 @@
 #include "Metal.h"
 
-Metal::Metal()
+Metal::Metal():Material(100)
 {
-	setPrice(100);
 }

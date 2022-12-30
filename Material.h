@@ -4,7 +4,7 @@ class Material
 private:
 	int price;
 public:
-	Material();
+	Material(int price);
 	int getPrice();
 
 protected:

@@ -1,6 +1,5 @@
 #include "Plactic.h"
 
-Plastic::Plastic()
+Plastic::Plastic():Material(10)
 {
-	setPrice(20);
 }
