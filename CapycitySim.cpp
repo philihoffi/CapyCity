@@ -44,8 +44,10 @@ bool CapycitySim::collidingWithOtherBuilding(int buildingWidth, int buildingLeng
 
 bool CapycitySim::validBuilding(char input)
 {
-	// TO-DO
-	return true;
+	for (Building x : allBuildingTypes)
+		if (x.getLabel() == input)
+			return true;
+	return false;
 }
 
 void CapycitySim::changeBuildSpace(int buildingWidth, int buildingLength, int posWidth, int posLength, Building* buildType)
@@ -144,7 +146,7 @@ int CapycitySim::showMap()
 	}
 	cout << "+" << printCharMultipleTimes('-', length * 2 + 1) << '+' << endl;
 
-
+	//TO-DO
 	for (Building x : allBuildingTypes)
 		cout << x.getClassname() << ": " << (char)x.getLabel() << endl;
 	return 1;
