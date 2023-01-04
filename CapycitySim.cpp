@@ -91,10 +91,11 @@ int CapycitySim::buildBuilding()
 	char userInput;
 	cout << "Gebäudeart :" << endl;
 	for (Building x : allBuildingTypes)
-		cout << x.getClassname() << ": " << (char)x.getLabel() << endl;
+		if (x.getLabel() != ' ')
+			cout << "\t" << (char)x.getLabel() << ": " << x.getClassname() << endl;
 	do
 	{
-	cin >> userInput;
+		cin >> userInput;
 	} while (!validBuilding(userInput));
 
 	buildType = getBuilding(userInput);
@@ -145,9 +146,50 @@ int CapycitySim::showMap()
 	}
 	cout << "+" << printCharMultipleTimes('-', length * 2 + 1) << '+' << endl;
 
-	//TO-DO
+
 	for (Building x : allBuildingTypes)
-		cout << x.getClassname() << ": " << (char)x.getLabel() << endl;
+		if (x.getLabel() != ' ')
+			cout << x.toString() << endl;
+	cout << printCharMultipleTimes('-', 20) << endl;
+
+	//TO-DO
+	int totalCost = 0;
+	int totalWood = 0;
+	int totalPlastic = 0;
+	int totalMetal = 0;
+
+
+	for (int i = 0; i < length; i++)
+	{
+		for (int j = 0; j < width; j++)
+		{
+			if (buildSpace[i][j]->getLabel() != ' ') {
+				Building* tmp = buildSpace[i][j];
+				totalCost += tmp->getPrice();
+				for (Material x : tmp->getMaterials()) {
+					totalCost += x.getPrice();
+					if (x.getClassName() == "Metal") {
+						totalMetal += 1;
+					}
+					else if (x.getClassName() == "Plastic") {
+						totalPlastic += 1;
+					}
+					else if (x.getClassName() == "Wood") {
+						totalWood += 1;
+					}
+				}
+
+
+
+			}
+		}
+	}
+
+	cout << "Total Wood required:\t" << totalWood<<endl;
+	cout << "Total Metal required:\t" << totalMetal << endl;
+	cout << "Total Plastic required:\t" << totalPlastic << endl;
+	cout << printCharMultipleTimes('-', 20) << endl;
+	cout << "Total Cost:\t" << totalCost << endl;
 	return 1;
 }
 
@@ -220,7 +262,7 @@ CapycitySim::CapycitySim(int length, int width)
 		}
 	}
 
-	allBuildingTypes[0]= Building(*new EmptySpace());
+	allBuildingTypes[0] = Building(*new EmptySpace());
 	allBuildingTypes[1] = Building(*new Windmill());
 	allBuildingTypes[2] = Building(*new Residential());
 

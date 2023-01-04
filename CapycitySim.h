@@ -1,9 +1,11 @@
 #pragma once
+#include <iostream>
 #include <string>
 #include "Building.h"
 #include "EmptySpace.h"
 #include "Residential.h"
 #include "Windmill.h"
+
 
 
 using namespace std;

@@ -5,6 +5,7 @@
 #include "Plactic.h"
 #include "Metal.h"
 #include <string>
+#include <sstream>
 
 
 class Building
@@ -27,6 +28,8 @@ public:
 	~Building();
 
 	Building(Building& other);
+
+	std::string toString();
 
 protected:
 	void setPrice(int price);

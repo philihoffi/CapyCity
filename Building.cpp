@@ -46,6 +46,25 @@ Building::Building(Building& other)
 	this->Materials = other.Materials;
 }
 
+std::string Building::toString()
+{
+	int totalPriceMaterials = 0;
+	for (Material m : Materials)
+		totalPriceMaterials += m.getPrice();
+
+	std::ostringstream result;
+	result << label << " : " << classname << "\tprice = " << baseprice << "\tTotal Materrial Price = " << totalPriceMaterials << "\tmaterials = [";
+
+	for (int i = 0; i < Materials.size(); i++) {
+		result << Materials[i].toString();
+		if (i < Materials.size() - 1) {
+			result << ", ";
+		}
+	}
+	result << "]";
+	return result.str();
+}
+
 void Building::setPrice(int price)
 {
 	this->baseprice = price;

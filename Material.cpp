@@ -1,16 +1,35 @@
 #include "Material.h"
 
+
 void Material::setPrice(int price)
 {
 	this->price = price;
 }
 
-Material::Material(int price)
+void Material::setClassname(std::string className)
+{
+	this->className = className;
+}
+
+Material::Material(int price, std::string className)
 {
 	setPrice(price);
+	setClassname(className);
 }
 
 int Material::getPrice()
 {
 	return this->price;
+}
+
+std::string Material::getClassName()
+{
+	return this->className;
+}
+
+std::string Material::toString()
+{
+	std::ostringstream result;
+	result << className;
+	return result.str();
 }
