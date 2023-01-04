@@ -27,6 +27,7 @@ private:
 	int showMap();
 	int endProgram();
 	int menu();
+	Building* getBuilding(char label);
 
 public:
 	CapycitySim(int length, int width);

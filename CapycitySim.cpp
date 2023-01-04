@@ -97,8 +97,7 @@ int CapycitySim::buildBuilding()
 	cin >> userInput;
 	} while (!validBuilding(userInput));
 
-	//TO-DO use userinput
-	buildType = new Residential();
+	buildType = getBuilding(userInput);
 	changeBuildSpace(buildingWidth, buildingLength, posWidth, posLength, buildType);
 
 	return 1;
@@ -193,6 +192,13 @@ int CapycitySim::menu()
 		cout << "HOW DID I GET HERE?" << endl;
 		return 1;
 	}
+}
+
+Building* CapycitySim::getBuilding(char label)
+{
+	for (Building x : allBuildingTypes)
+		if (x.getLabel() == label)
+			return new Building(x);
 }
 
 CapycitySim::CapycitySim(int length, int width)
