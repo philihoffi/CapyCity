@@ -152,7 +152,6 @@ int CapycitySim::showMap()
 			cout << x.toString() << endl;
 	cout << printCharMultipleTimes('-', 20) << endl;
 
-	//TO-DO
 	int totalCost = 0;
 	int totalWood = 0;
 	int totalPlastic = 0;
