@@ -1,9 +1,6 @@
 #pragma once
 #include <vector>
 #include "Material.h"
-#include "Wood.h"
-#include "Plactic.h"
-#include "Metal.h"
 #include <string>
 #include <sstream>
 
@@ -36,5 +33,29 @@ protected:
 	void setLabel(char label);
 	void setClassname(std::string classname);
 	void addMaterial(Material material);
+};
+
+
+class Windmill :public Building
+{
+public:
+	Windmill();
+	~Windmill();
+};
+
+
+class Residential :public Building
+{
+private:
+public:
+	Residential();
+	~Residential();
+};
+
+class EmptySpace :public Building
+{
+public:
+	EmptySpace();
+	~EmptySpace();
 };
 

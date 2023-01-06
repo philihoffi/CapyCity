@@ -19,3 +19,21 @@ protected:
 	
 };
 
+class Wood :public Material
+{
+public:
+	Wood();
+};
+
+class Plastic :public Material
+{
+public:
+	Plastic();
+};
+
+class Metal :public Material
+{
+public:
+	Metal();
+};
+

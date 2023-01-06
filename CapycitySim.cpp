@@ -247,7 +247,7 @@ CapycitySim::CapycitySim(int length, int width)
 	this->length = length;
 	this->width = width;
 
-	buildSpace = new Building * *[length];
+	buildSpace = new Building **[length];
 	for (int i = 0; i < length; i++)
 	{
 		buildSpace[i] = new Building * [width];
@@ -269,6 +269,7 @@ CapycitySim::CapycitySim(int length, int width)
 
 CapycitySim::~CapycitySim()
 {
+	//To-DO überprüfen stimmt evtl nicht
 	for (int i = 0; i < width; ++i)
 	{
 		delete buildSpace[i];

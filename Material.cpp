@@ -33,3 +33,16 @@ std::string Material::toString()
 	result << className;
 	return result.str();
 }
+
+Wood::Wood() :Material(50, "Wood")
+{
+}
+
+Plastic::Plastic() :Material(10, "Plastic")
+{
+}
+
+Metal::Metal() :Material(100, "Metal")
+{
+}
+

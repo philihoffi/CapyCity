@@ -84,3 +84,18 @@ void Building::addMaterial(Material material)
 {
 	this->Materials.push_back(material);
 }
+
+Windmill::Windmill() : Building(10, 'W', { Wood(), Metal(), Metal(), Metal(), Plastic() }, "Windmill")
+{
+
+}
+
+Residential::Residential() : Building(100, 'R', { Wood(), Wood(), Metal(), Metal(), Plastic() }, "Residential")
+{
+
+}
+
+EmptySpace::EmptySpace() : Building(0, ' ', { }, "EmptySpace")
+{
+
+}

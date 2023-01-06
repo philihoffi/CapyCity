@@ -130,24 +130,12 @@
     <ClCompile Include="Building.cpp" />
     <ClCompile Include="CapyCity.cpp" />
     <ClCompile Include="CapycitySim.cpp" />
-    <ClCompile Include="EmptySpace.cpp" />
     <ClCompile Include="Material.cpp" />
-    <ClCompile Include="Metal.cpp" />
-    <ClCompile Include="Plactic.cpp" />
-    <ClCompile Include="Residential.cpp" />
-    <ClCompile Include="Windmill.cpp" />
-    <ClCompile Include="Wood.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Building.h" />
     <ClInclude Include="CapycitySim.h" />
-    <ClInclude Include="EmptySpace.h" />
     <ClInclude Include="Material.h" />
-    <ClInclude Include="Metal.h" />
-    <ClInclude Include="Plactic.h" />
-    <ClInclude Include="Residential.h" />
-    <ClInclude Include="Windmill.h" />
-    <ClInclude Include="Wood.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
