@@ -165,16 +165,16 @@ int CapycitySim::showMap()
 			if (buildSpace[i][j]->getLabel() != ' ') {
 				Building* tmp = buildSpace[i][j];
 				totalCost += tmp->getPrice();
-				for (Material x : tmp->getMaterials()) {
-					totalCost += x.getPrice();
-					if (x.getClassName() == "Metal") {
-						totalMetal += 1;
+				for (auto& m : tmp->getMaterials()) {
+					totalCost += m.first->getPrice();
+					if (m.first->getClassName() == "Metal") {
+						totalMetal += m.second;
 					}
-					else if (x.getClassName() == "Plastic") {
-						totalPlastic += 1;
+					else if (m.first->getClassName() == "Plastic") {
+						totalPlastic += m.second;
 					}
-					else if (x.getClassName() == "Wood") {
-						totalWood += 1;
+					else if (m.first->getClassName() == "Wood") {
+						totalWood += m.second;
 					}
 				}
 

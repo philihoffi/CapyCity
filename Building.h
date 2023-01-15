@@ -3,6 +3,7 @@
 #include "Material.h"
 #include <string>
 #include <sstream>
+#include <map>
 
 
 class Building
@@ -11,17 +12,18 @@ private:
 	int baseprice;
 	char label;
 	std::string classname;
-	std::vector<Material> Materials;
+	//std::vector<Material> Materials;
+	std::map<Material*, int> Materials;
 
 public:
 	int getPrice();
 	int getLabel();
 	std::string getClassname();
 
-	std::vector<Material> getMaterials();
+	std::map<Material*, int> getMaterials();
 
 	Building();
-	Building(int baseprice,char label, std::vector<Material> Materials, std::string classname);
+	Building(int baseprice,char label, std::map<Material*,int> Materials, std::string classname);
 	~Building();
 
 	Building(Building& other);
@@ -32,7 +34,6 @@ protected:
 	void setPrice(int price);
 	void setLabel(char label);
 	void setClassname(std::string classname);
-	void addMaterial(Material material);
 };
 
 

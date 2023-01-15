@@ -5,9 +5,11 @@
 class Material
 {
 private:
+	
+public:
 	int price;
 	std::string className;
-public:
+
 	Material(int price, std::string className);
 	int getPrice();
 	std::string getClassName();
