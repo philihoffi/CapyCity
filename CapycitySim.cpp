@@ -156,6 +156,7 @@ int CapycitySim::showMap()
 	int totalWood = 0;
 	int totalPlastic = 0;
 	int totalMetal = 0;
+	int totalPower = 0;
 
 
 	for (int i = 0; i < length; i++)
@@ -164,9 +165,9 @@ int CapycitySim::showMap()
 		{
 			if (buildSpace[i][j]->getLabel() != ' ') {
 				Building* tmp = buildSpace[i][j];
-				totalCost += tmp->getPrice();
+				totalCost += tmp->getTotalPrice();
+
 				for (auto& m : tmp->getMaterials()) {
-					totalCost += m.first->getPrice();
 					if (m.first->getClassName() == "Metal") {
 						totalMetal += m.second;
 					}
@@ -187,6 +188,8 @@ int CapycitySim::showMap()
 	cout << "Total Wood required:\t" << totalWood<<endl;
 	cout << "Total Metal required:\t" << totalMetal << endl;
 	cout << "Total Plastic required:\t" << totalPlastic << endl;
+	cout << printCharMultipleTimes('-', 20) << endl;
+	cout << "Total Plastic required:\t" << totalPower << endl;
 	cout << printCharMultipleTimes('-', 20) << endl;
 	cout << "Total Cost:\t" << totalCost << endl;
 	return 1;

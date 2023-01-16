@@ -5,9 +5,23 @@ int Building::getPrice()
 	return this->baseprice;
 }
 
+int Building::getTotalPrice()
+{
+	int toalprice = baseprice;
+	for (auto& m : getMaterials())
+		toalprice += m.first->getPrice()*m.second;
+
+	return toalprice;
+}
+
 int Building::getLabel()
 {
 	return this->label;
+}
+
+int Building::getPower()
+{
+	return this->power;
 }
 
 std::string Building::getClassname()
@@ -24,7 +38,7 @@ Building::Building()
 {
 }
 
-Building::Building(int baseprice, char label, std::map<Material*,int> Materials, std::string classname)
+Building::Building(int baseprice, char label, std::map<Material*,int> Materials, std::string classname, int power)
 {
 	setLabel(label);
 	setPrice(baseprice);
@@ -52,7 +66,7 @@ std::string Building::toString()
 		totalPriceMaterials += m.first->getPrice();
 
 	std::ostringstream result;
-	result << label << " : " << classname << "\tprice = " << baseprice << "\tTotal Materrial Price = " << totalPriceMaterials << "\tmaterials = [";
+	result << label << " : " << classname <<"\t\npower: " << power << "\nprice = " << baseprice << "\tTotal Materrial Price = " << totalPriceMaterials << "\t\nmaterials = [";
 
 	for (auto& m : Materials)
 		result <<" " << m.first->toString() << " : " << m.second << " ";
@@ -76,17 +90,17 @@ void Building::setClassname(std::string classname)
 	this->classname = classname;
 }
 
-Windmill::Windmill() : Building(10, 'W', std::map<Material*, int>{{new Wood(), 10}, { new Plastic(), 5}, { new Metal(), 5 }}, "Windmill")
+Windmill::Windmill() : Building(10, 'W', std::map<Material*, int>{{new Wood(), 10}, { new Plastic(), 5}, { new Metal(), 5 }}, "Windmill",100)
 {
 
 }
 
-Residential::Residential() : Building(100, 'R', std::map<Material*, int>{ {new Wood(), 1}, { new Plastic(), 11 }, { new Metal(), 8 }}, "Residential")
+Residential::Residential() : Building(100, 'R', std::map<Material*, int>{ {new Wood(), 1}, { new Plastic(), 11 }, { new Metal(), 8 }}, "Residential",0)
 {
 
 }
 
-EmptySpace::EmptySpace() : Building(0, ' ', { }, "EmptySpace")
+EmptySpace::EmptySpace() : Building(0, ' ', { }, "EmptySpace",0)
 {
 
 }

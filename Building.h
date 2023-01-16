@@ -9,6 +9,7 @@
 class Building
 {
 private:
+	int power;
 	int baseprice;
 	char label;
 	std::string classname;
@@ -17,13 +18,15 @@ private:
 
 public:
 	int getPrice();
+	int getTotalPrice();
 	int getLabel();
+	int getPower();
 	std::string getClassname();
 
 	std::map<Material*, int> getMaterials();
 
 	Building();
-	Building(int baseprice,char label, std::map<Material*,int> Materials, std::string classname);
+	Building(int baseprice,char label, std::map<Material*,int> Materials, std::string classname, int power);
 	~Building();
 
 	Building(Building& other);
