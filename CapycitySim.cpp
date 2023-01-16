@@ -32,7 +32,7 @@ bool CapycitySim::collidingWithOtherBuilding(int buildingWidth, int buildingLeng
 	{
 		int buildingLengthSave = buildingLength;
 		for (int j = posLength; j < length && buildingLength > 0; j++, buildingLength--)
-			if (buildSpace[i][j]->getLabel() != ' ')
+			if (currentblueprint->getBuildSpace()[i][j]->getLabel() != ' ')
 			{
 				cout << "colliding with other Building" << endl;
 				return false;
@@ -56,8 +56,8 @@ void CapycitySim::changeBuildSpace(int buildingWidth, int buildingLength, int po
 	{
 		int buildingLengthSave = buildingLength;
 		for (int j = posLength; j < length && buildingLength > 0; j++, buildingLength--) {
-			delete buildSpace[i][j];
-			buildSpace[i][j] = new Building(*buildType);
+			delete currentblueprint->getBuildSpace()[i][j];
+			currentblueprint->getBuildSpace()[i][j] = new Building(*buildType);
 		}
 		buildingLength = buildingLengthSave;
 	}
@@ -140,7 +140,7 @@ int CapycitySim::showMap()
 		cout << "| ";
 		for (int j = 0; j < length; j++)
 		{
-			cout << (char)buildSpace[i][j]->getLabel() << ' ';
+			cout << (char)currentblueprint->getBuildSpace()[i][j]->getLabel() << ' ';
 		}
 		cout << '|' << endl;
 	}
@@ -163,8 +163,8 @@ int CapycitySim::showMap()
 	{
 		for (int j = 0; j < width; j++)
 		{
-			if (buildSpace[i][j]->getLabel() != ' ') {
-				Building* tmp = buildSpace[i][j];
+			if (currentblueprint->getBuildSpace()[i][j]->getLabel() != ' ') {
+				Building* tmp = currentblueprint->getBuildSpace()[i][j];
 				totalCost += tmp->getTotalPrice();
 
 				for (auto& m : tmp->getMaterials()) {
@@ -250,19 +250,8 @@ CapycitySim::CapycitySim(int length, int width)
 	this->length = length;
 	this->width = width;
 
-	buildSpace = new Building **[length];
-	for (int i = 0; i < length; i++)
-	{
-		buildSpace[i] = new Building * [width];
-	}
-
-	for (int i = 0; i < length; i++)
-	{
-		for (int j = 0; j < width; j++)
-		{
-			buildSpace[i][j] = new EmptySpace();
-		}
-	}
+	this->blueprints.push_back(new Blueprint(length, width));
+	currentblueprint = blueprints.front();
 
 	allBuildingTypes[0] = Building(*new EmptySpace());
 	allBuildingTypes[1] = Building(*new Windmill());
@@ -272,12 +261,7 @@ CapycitySim::CapycitySim(int length, int width)
 
 CapycitySim::~CapycitySim()
 {
-	//To-DO überprüfen stimmt evtl nicht
-	for (int i = 0; i < width; ++i)
-	{
-		delete buildSpace[i];
-	}
-	delete buildSpace;
+
 }
 
 int CapycitySim::start()

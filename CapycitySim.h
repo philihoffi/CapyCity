@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include "Building.h"
+#include "Blueprint.h"
 
 
 
@@ -10,7 +11,9 @@ class CapycitySim
 {
 	
 private:
-	Building*** buildSpace;
+	std::vector<Blueprint*> blueprints;
+	Blueprint* currentblueprint;
+
 	int length;
 	int width;
 
