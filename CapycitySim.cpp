@@ -11,127 +11,6 @@ string CapycitySim::printCharMultipleTimes(char c, int times)
 	return s;
 }
 
-bool CapycitySim::validBuildspace(int buildingWidth, int buildingLength, int posWidth, int posLength)
-{
-	if (buildingWidth < 1 || buildingLength < 1 || posWidth < 0 || posLength < 0)
-	{
-		cout << "value was either too large or too smalll" << endl;
-		return false;
-	}
-	if (buildingWidth + posWidth > width || buildingLength + posLength > length)
-	{
-		cout << "value was either too large or too small" << endl;
-		return false;
-	}
-	return true;
-}
-
-bool CapycitySim::collidingWithOtherBuilding(int buildingWidth, int buildingLength, int posWidth, int posLength)
-{
-	for (int i = posWidth; i < width && buildingWidth > 0; i++, buildingWidth--)
-	{
-		int buildingLengthSave = buildingLength;
-		for (int j = posLength; j < length && buildingLength > 0; j++, buildingLength--)
-			if (currentblueprint->getBuildSpace()[i][j]->getLabel() != ' ')
-			{
-				cout << "colliding with other Building" << endl;
-				return false;
-			}
-		buildingLength = buildingLengthSave;
-	}
-	return true;
-}
-
-bool CapycitySim::validBuilding(char input)
-{
-	for (Building x : allBuildingTypes)
-		if (x.getLabel() == input)
-			return true;
-	return false;
-}
-
-void CapycitySim::changeBuildSpace(int buildingWidth, int buildingLength, int posWidth, int posLength, Building* buildType)
-{
-	for (int i = posWidth; i < width && buildingWidth > 0; i++, buildingWidth--)
-	{
-		int buildingLengthSave = buildingLength;
-		for (int j = posLength; j < length && buildingLength > 0; j++, buildingLength--) {
-			delete currentblueprint->getBuildSpace()[i][j];
-			currentblueprint->getBuildSpace()[i][j] = new Building(*buildType);
-		}
-		buildingLength = buildingLengthSave;
-	}
-	delete buildType;
-}
-
-int CapycitySim::buildBuilding()
-{
-	int buildingLength;
-	int buildingWidth;
-	int posWidth;
-	int posLength;
-	Building* buildType;
-	do
-	{
-		cout << "exit = -1" << endl;
-		cout << "Bitte breite(Y) des Gebäudes eingeben -> ";
-		cin >> buildingWidth;
-		cout << "Bitte länge(X) des Gebäudes eingeben -> ";
-		cin >> buildingLength;
-		cout << "posY -> ";
-		cin >> posWidth;
-		cout << "posX -> ";
-		cin >> posLength;
-
-		if (buildingWidth == -1 || buildingLength == -1 || posWidth == -1 || posLength == -1)
-			return 1;
-
-	} while (!validBuildspace(buildingWidth, buildingLength, posWidth, posLength) || !collidingWithOtherBuilding(buildingWidth, buildingLength, posWidth, posLength));
-
-	char userInput;
-	cout << "Gebäudeart :" << endl;
-	for (Building x : allBuildingTypes)
-		if (x.getLabel() != ' ')
-			cout << "\t" << (char)x.getLabel() << ": " << x.getClassname() << endl;
-	do
-	{
-		cin >> userInput;
-	} while (!validBuilding(userInput));
-
-	buildType = getBuilding(userInput);
-	changeBuildSpace(buildingWidth, buildingLength, posWidth, posLength, buildType);
-
-	return 1;
-}
-
-int CapycitySim::deleteBuilding()
-{
-	int deletLength;
-	int deletWidth;
-	int posWidth;
-	int posLength;
-
-	do
-	{
-		cout << "exit = -1" << endl;
-		cout << "Bitte breite(Y) des Abriss eingeben -> ";
-		cin >> deletWidth;
-		cout << "Bitte länge(X) des Abriss eingeben -> ";
-		cin >> deletLength;
-		cout << "posY -> ";
-		cin >> posWidth;
-		cout << "posX -> ";
-		cin >> posLength;
-
-		if (deletWidth == -1 || deletLength == -1 || posWidth == -1 || posLength == -1)
-			return 1;
-	} while (!validBuildspace(deletWidth, deletLength, posWidth, posLength));
-
-	changeBuildSpace(deletWidth, deletWidth, posWidth, posLength, new EmptySpace());
-
-	return 1;
-}
-
 int CapycitySim::showMap()
 {
 	cout << "+" << printCharMultipleTimes('-', length * 2 + 1) << '+' << endl;
@@ -221,10 +100,10 @@ int CapycitySim::menu()
 	switch (menuUserInput)
 	{
 	case 0:
-		return buildBuilding();
+		return currentblueprint->buildBuilding();
 		break;
 	case 1:
-		return deleteBuilding();
+		return currentblueprint->deleteBuilding();
 		break;
 	case 2:
 		return showMap();
@@ -238,12 +117,6 @@ int CapycitySim::menu()
 	}
 }
 
-Building* CapycitySim::getBuilding(char label)
-{
-	for (Building x : allBuildingTypes)
-		if (x.getLabel() == label)
-			return new Building(x);
-}
 
 CapycitySim::CapycitySim(int length, int width)
 {
@@ -256,7 +129,6 @@ CapycitySim::CapycitySim(int length, int width)
 	allBuildingTypes[0] = Building(*new EmptySpace());
 	allBuildingTypes[1] = Building(*new Windmill());
 	allBuildingTypes[2] = Building(*new Residential());
-
 }
 
 CapycitySim::~CapycitySim()

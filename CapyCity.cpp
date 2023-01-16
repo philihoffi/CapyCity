@@ -8,9 +8,10 @@
 using namespace std;
 
 
-
 int main(int argc, char* argv[])
 {
+	
+
 	if (argc < 3) {
 		std::cout << "Bitte geben Sie Länge und Breite als Argumente an" << std::endl;
 		return 1;
