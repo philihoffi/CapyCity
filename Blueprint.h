@@ -8,6 +8,8 @@ private:
 	int length;
 	int width;
 
+	std::string printCharMultipleTimes(char c, int times);
+
 public:
 	Building*** getBuildSpace();
 	Blueprint(int length, int width);
@@ -21,6 +23,8 @@ public:
 	void changeBuildSpace(int buildingWidth, int buildingLength, int posWidth, int posLength, Building* buildType);
 	int buildBuilding();
 	int deleteBuilding();
+	int showMap();
+	std::string getBuildSpaceAsString();
 
 	Building* getBuilding(char label);
 };

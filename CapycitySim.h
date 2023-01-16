@@ -20,7 +20,7 @@ private:
 	int width;
 
 	string printCharMultipleTimes(char c, int times);
-	int showMap();
+	
 	int endProgram();
 	int menu();
 

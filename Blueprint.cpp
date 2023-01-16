@@ -1,6 +1,14 @@
 #include "Blueprint.h"
 #include <iostream>
-using namespace std;
+
+
+std::string Blueprint::printCharMultipleTimes(char c, int times)
+{
+	std::string s = "";
+	for (int i = 0; i < times; ++i)
+		s += c;
+	return s;
+}
 
 Building*** Blueprint::getBuildSpace()
 {
@@ -46,12 +54,12 @@ bool Blueprint::validBuildspace(int buildingWidth, int buildingLength, int posWi
 {
 	if (buildingWidth < 1 || buildingLength < 1 || posWidth < 0 || posLength < 0)
 	{
-		cout << "value was either too large or too smalll" << endl;
+		std::cout << "value was either too large or too smalll" << std::endl;
 		return false;
 	}
 	if (buildingWidth + posWidth > width || buildingLength + posLength > length)
 	{
-		cout << "value was either too large or too small" << endl;
+		std::cout << "value was either too large or too small" << std::endl;
 		return false;
 	}
 	return true;
@@ -65,7 +73,7 @@ bool Blueprint::collidingWithOtherBuilding(int buildingWidth, int buildingLength
 		for (int j = posLength; j < length && buildingLength > 0; j++, buildingLength--)
 			if (getBuildSpace()[i][j]->getLabel() != ' ')
 			{
-				cout << "colliding with other Building" << endl;
+				std::cout << "colliding with other Building" << std::endl;
 				return false;
 			}
 		buildingLength = buildingLengthSave;
@@ -104,15 +112,15 @@ int Blueprint::buildBuilding()
 	Building* buildType;
 	do
 	{
-		cout << "exit = -1" << endl;
-		cout << "Bitte breite(Y) des Gebäudes eingeben -> ";
-		cin >> buildingWidth;
-		cout << "Bitte länge(X) des Gebäudes eingeben -> ";
-		cin >> buildingLength;
-		cout << "posY -> ";
-		cin >> posWidth;
-		cout << "posX -> ";
-		cin >> posLength;
+		std::cout << "exit = -1" << std::endl;
+		std::cout << "Bitte breite(Y) des Gebäudes eingeben -> ";
+		std::cin >> buildingWidth;
+		std::cout << "Bitte länge(X) des Gebäudes eingeben -> ";
+		std::cin >> buildingLength;
+		std::cout << "posY -> ";
+		std::cin >> posWidth;
+		std::cout << "posX -> ";
+		std::cin >> posLength;
 
 		if (buildingWidth == -1 || buildingLength == -1 || posWidth == -1 || posLength == -1)
 			return 1;
@@ -120,13 +128,13 @@ int Blueprint::buildBuilding()
 	} while (!validBuildspace(buildingWidth, buildingLength, posWidth, posLength) || !collidingWithOtherBuilding(buildingWidth, buildingLength, posWidth, posLength));
 
 	char userInput;
-	cout << "Gebäudeart :" << endl;
+	std::cout << "Gebäudeart :" << std::endl;
 	for (Building x : allBuildingTypes)
 		if (x.getLabel() != ' ')
-			cout << "\t" << (char)x.getLabel() << ": " << x.getClassname() << endl;
+			std::cout << "\t" << (char)x.getLabel() << ": " << x.getClassname() << std::endl;
 	do
 	{
-		cin >> userInput;
+		std::cin >> userInput;
 	} while (!validBuilding(userInput));
 
 	buildType = getBuilding(userInput);
@@ -144,15 +152,15 @@ int Blueprint::deleteBuilding()
 
 	do
 	{
-		cout << "exit = -1" << endl;
-		cout << "Bitte breite(Y) des Abriss eingeben -> ";
-		cin >> deletWidth;
-		cout << "Bitte länge(X) des Abriss eingeben -> ";
-		cin >> deletLength;
-		cout << "posY -> ";
-		cin >> posWidth;
-		cout << "posX -> ";
-		cin >> posLength;
+		std::cout << "exit = -1" << std::endl;
+		std::cout << "Bitte breite(Y) des Abriss eingeben -> ";
+		std::cin >> deletWidth;
+		std::cout << "Bitte länge(X) des Abriss eingeben -> ";
+		std::cin >> deletLength;
+		std::cout << "posY -> ";
+		std::cin >> posWidth;
+		std::cout << "posX -> ";
+		std::cin >> posLength;
 
 		if (deletWidth == -1 || deletLength == -1 || posWidth == -1 || posLength == -1)
 			return 1;
@@ -169,3 +177,74 @@ Building* Blueprint::getBuilding(char label)
 		if (x.getLabel() == label)
 			return new Building(x);
 }
+
+int Blueprint::showMap()
+{
+	std::cout << getBuildSpaceAsString() << std::endl;
+
+	for (Building x : allBuildingTypes)
+		if (x.getLabel() != ' ')
+			std::cout << x.toString() << std::endl;
+	std::cout << printCharMultipleTimes('-', 20) << std::endl;
+	int totalCost = 0;
+	int totalWood = 0;
+	int totalPlastic = 0;
+	int totalMetal = 0;
+	int totalPower = 0;
+
+
+	for (int i = 0; i < length; i++)
+	{
+		for (int j = 0; j < width; j++)
+		{
+			if (getBuildSpace()[i][j]->getLabel() != ' ') {
+				Building* tmp = getBuildSpace()[i][j];
+				totalCost += tmp->getTotalPrice();
+
+				for (auto& m : tmp->getMaterials()) {
+					if (m.first->getClassName() == "Metal") {
+						totalMetal += m.second;
+					}
+					else if (m.first->getClassName() == "Plastic") {
+						totalPlastic += m.second;
+					}
+					else if (m.first->getClassName() == "Wood") {
+						totalWood += m.second;
+					}
+				}
+
+
+
+			}
+		}
+	}
+
+	std::cout << "Total Wood required:\t" << totalWood << std::endl;
+	std::cout << "Total Metal required:\t" << totalMetal << std::endl;
+	std::cout << "Total Plastic required:\t" << totalPlastic << std::endl;
+	std::cout << printCharMultipleTimes('-', 20) << std::endl;
+	std::cout << "Total Plastic required:\t" << totalPower << std::endl;
+	std::cout << printCharMultipleTimes('-', 20) << std::endl;
+	std::cout << "Total Cost:\t" << totalCost << std::endl;
+	return 1;
+}
+
+std::string Blueprint::getBuildSpaceAsString()
+{
+	std::ostringstream result;
+
+	result << "+" << printCharMultipleTimes('-', length * 2 + 1) << '+' << std::endl;
+	for (int i = width - 1; i >= 0; i--)
+	{
+		result << "| ";
+		for (int j = 0; j < length; j++)
+		{
+			result << (char)getBuildSpace()[i][j]->getLabel() << ' ';
+		}
+		result << '|' << std::endl;
+	}
+	result << "+" << printCharMultipleTimes('-', length * 2 + 1) << '+' << std::endl;
+
+	return result.str();
+}
+

@@ -11,68 +11,7 @@ string CapycitySim::printCharMultipleTimes(char c, int times)
 	return s;
 }
 
-int CapycitySim::showMap()
-{
-	cout << "+" << printCharMultipleTimes('-', length * 2 + 1) << '+' << endl;
-	for (int i = width - 1; i >= 0; i--)
-	{
-		cout << "| ";
-		for (int j = 0; j < length; j++)
-		{
-			cout << (char)currentblueprint->getBuildSpace()[i][j]->getLabel() << ' ';
-		}
-		cout << '|' << endl;
-	}
-	cout << "+" << printCharMultipleTimes('-', length * 2 + 1) << '+' << endl;
 
-
-	for (Building x : allBuildingTypes)
-		if (x.getLabel() != ' ')
-			cout << x.toString() << endl;
-	cout << printCharMultipleTimes('-', 20) << endl;
-
-	int totalCost = 0;
-	int totalWood = 0;
-	int totalPlastic = 0;
-	int totalMetal = 0;
-	int totalPower = 0;
-
-
-	for (int i = 0; i < length; i++)
-	{
-		for (int j = 0; j < width; j++)
-		{
-			if (currentblueprint->getBuildSpace()[i][j]->getLabel() != ' ') {
-				Building* tmp = currentblueprint->getBuildSpace()[i][j];
-				totalCost += tmp->getTotalPrice();
-
-				for (auto& m : tmp->getMaterials()) {
-					if (m.first->getClassName() == "Metal") {
-						totalMetal += m.second;
-					}
-					else if (m.first->getClassName() == "Plastic") {
-						totalPlastic += m.second;
-					}
-					else if (m.first->getClassName() == "Wood") {
-						totalWood += m.second;
-					}
-				}
-
-
-
-			}
-		}
-	}
-
-	cout << "Total Wood required:\t" << totalWood<<endl;
-	cout << "Total Metal required:\t" << totalMetal << endl;
-	cout << "Total Plastic required:\t" << totalPlastic << endl;
-	cout << printCharMultipleTimes('-', 20) << endl;
-	cout << "Total Plastic required:\t" << totalPower << endl;
-	cout << printCharMultipleTimes('-', 20) << endl;
-	cout << "Total Cost:\t" << totalCost << endl;
-	return 1;
-}
 
 int CapycitySim::endProgram()
 {
@@ -106,7 +45,7 @@ int CapycitySim::menu()
 		return currentblueprint->deleteBuilding();
 		break;
 	case 2:
-		return showMap();
+		return currentblueprint->showMap();
 		break;
 	case 3:
 		return endProgram();
