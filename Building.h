@@ -36,6 +36,7 @@ public:
 protected:
 	void setPrice(int price);
 	void setLabel(char label);
+	void setPower(int power);
 	void setClassname(std::string classname);
 };
 

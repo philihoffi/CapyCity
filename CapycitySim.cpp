@@ -13,6 +13,32 @@ string CapycitySim::printCharMultipleTimes(char c, int times)
 
 
 
+int CapycitySim::showAllMaps()
+{
+	std::ostringstream result;
+	for (Blueprint* x : blueprints)
+		result<< "Indicator:"<< x->getIndicator()<<std::endl << x->getBuildSpaceAsString() << std::endl;
+
+	std::cout << result.str() << std::endl;
+	return 1;
+}
+
+int CapycitySim::newBlueprint()
+{
+	for (Blueprint* x : blueprints){
+		cout << " . " << endl;
+		if (!(*currentblueprint)(x)) {
+			blueprints.push_back(currentblueprint);
+		}
+	}
+
+	if (blueprints.empty())
+		blueprints.push_back(currentblueprint);
+
+	currentblueprint = new Blueprint(length, width);
+	return 1;
+}
+
 int CapycitySim::endProgram()
 {
 	return -1;
@@ -25,13 +51,15 @@ int CapycitySim::menu()
 	cout << "|" << printCharMultipleTimes(' ', 5) << "0 -> build Building" << printCharMultipleTimes(' ', 6) << '|' << endl;
 	cout << "|" << printCharMultipleTimes(' ', 5) << "1 -> delete Building" << printCharMultipleTimes(' ', 5) << '|' << endl;
 	cout << "|" << printCharMultipleTimes(' ', 5) << "2 -> show map" << printCharMultipleTimes(' ', 12) << '|' << endl;
-	cout << "|" << printCharMultipleTimes(' ', 5) << "3 -> end Program" << printCharMultipleTimes(' ', 9) << '|' << endl;
+	cout << "|" << printCharMultipleTimes(' ', 5) << "3 -> new Blueprint" << printCharMultipleTimes(' ', 7) << '|' << endl;
+	cout << "|" << printCharMultipleTimes(' ', 5) << "4 -> show all maps" << printCharMultipleTimes(' ', 7) << '|' << endl;
+	cout << "|" << printCharMultipleTimes(' ', 5) << "5 -> end Program" << printCharMultipleTimes(' ', 9) << '|' << endl;
 	cout << "|" << printCharMultipleTimes(' ', 30) << '|' << endl;
 	cout << "|" << printCharMultipleTimes(' ', 12) << "input?" << printCharMultipleTimes(' ', 12) << '|' << endl;
 	cout << "+" << printCharMultipleTimes('-', 30) << '+' << endl;
 
 	int menuUserInput = -1;
-	while (menuUserInput < 0 || menuUserInput > 3)
+	while (menuUserInput < 0 || menuUserInput > 5)
 	{
 		cin >> menuUserInput;
 	}
@@ -48,6 +76,12 @@ int CapycitySim::menu()
 		return currentblueprint->showMap();
 		break;
 	case 3:
+		return newBlueprint();
+		break;
+	case 4:
+		return showAllMaps();
+		break;
+	case 5:
 		return endProgram();
 		break;
 	default:
@@ -62,12 +96,9 @@ CapycitySim::CapycitySim(int length, int width)
 	this->length = length;
 	this->width = width;
 
-	this->blueprints.push_back(new Blueprint(length, width));
-	currentblueprint = blueprints.front();
+	//this->blueprints.push_back();
+	currentblueprint = new Blueprint(length, width);
 
-	allBuildingTypes[0] = Building(*new EmptySpace());
-	allBuildingTypes[1] = Building(*new Windmill());
-	allBuildingTypes[2] = Building(*new Residential());
 }
 
 CapycitySim::~CapycitySim()

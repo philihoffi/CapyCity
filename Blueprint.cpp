@@ -178,8 +178,26 @@ Building* Blueprint::getBuilding(char label)
 			return new Building(x);
 }
 
+bool Blueprint::operator()(Blueprint* other)
+{
+	if (other == nullptr)
+		return false;
+	if (other == this)
+		return false;
+	for (int i = width - 1; i >= 0; i--)
+	{
+		for (int j = 0; j < length; j++)
+		{
+			if (getBuildSpace()[i][j]->getLabel() == other->getBuildSpace()[i][j]->getLabel())
+				return false;
+		}
+	}
+	return true;
+}
+
 int Blueprint::showMap()
 {
+	std::cout << "Indicator: " << getIndicator() << std::endl;
 	std::cout << getBuildSpaceAsString() << std::endl;
 
 	for (Building x : allBuildingTypes)
@@ -246,5 +264,31 @@ std::string Blueprint::getBuildSpaceAsString()
 	result << "+" << printCharMultipleTimes('-', length * 2 + 1) << '+' << std::endl;
 
 	return result.str();
+}
+
+float Blueprint::getIndicator()
+{
+	float k=0, totalPower = 0, totalPrice=0, totalArea=0;
+
+	for (int i = width - 1; i >= 0; i--)
+	{
+		for (int j = 0; j < length; j++)
+		{
+			totalPower+=getBuildSpace()[i][j]->getPower();
+			totalPrice+=getBuildSpace()[i][j]->getTotalPrice();
+			totalArea++;
+			//std::cout << "totalPower" << totalPower << "totalPrice" << totalPrice << "totalArea" << totalArea << std::endl;
+		}
+	}
+
+	std::cout << "totalPower:" << totalPower << " totalPrice:" << totalPrice << " totalArea:" << totalArea << std::endl;
+	if (totalPrice != 0){
+		k = totalPower / (totalPrice * totalArea);
+		std::cout << k << std::endl;
+	}
+	else
+		return 0;
+
+	return k;
 }
 

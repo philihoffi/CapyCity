@@ -1,4 +1,5 @@
 #include "Building.h"
+#include <iostream>
 
 int Building::getPrice()
 {
@@ -43,6 +44,7 @@ Building::Building(int baseprice, char label, std::map<Material*,int> Materials,
 	setLabel(label);
 	setPrice(baseprice);
 	setClassname(classname);
+	setPower(power);
 
 	this->Materials = Materials;
 }
@@ -56,6 +58,7 @@ Building::Building(Building& other)
 	this->classname = other.classname;
 	this->baseprice = other.baseprice;
 	this->label = other.label;
+	this->power = other.power;
 	this->Materials = other.Materials;
 }
 
@@ -85,6 +88,13 @@ void Building::setLabel(char label)
 	this->label = label;
 }
 
+void Building::setPower(int power)
+{
+	//std::cout << this->power << " " << power << std::endl;
+	this->power = power;
+	//std::cout << this->power << " " << power << std::endl;
+}
+
 void Building::setClassname(std::string classname)
 {
 	this->classname = classname;
@@ -92,7 +102,7 @@ void Building::setClassname(std::string classname)
 
 Windmill::Windmill() : Building(10, 'W', std::map<Material*, int>{{new Wood(), 10}, { new Plastic(), 5}, { new Metal(), 5 }}, "Windmill",100)
 {
-
+	this->setPower(100);
 }
 
 Residential::Residential() : Building(100, 'R', std::map<Material*, int>{ {new Wood(), 1}, { new Plastic(), 11 }, { new Metal(), 8 }}, "Residential",0)

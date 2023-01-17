@@ -26,6 +26,10 @@ public:
 	int showMap();
 	std::string getBuildSpaceAsString();
 
+	float getIndicator();
+
 	Building* getBuilding(char label);
+
+	bool operator()(Blueprint* other);
 };
 

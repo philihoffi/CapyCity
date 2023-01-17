@@ -11,8 +11,6 @@ class CapycitySim
 {
 	
 private:
-	Building allBuildingTypes[3];
-
 	std::vector<Blueprint*> blueprints;
 	Blueprint* currentblueprint;
 
@@ -21,6 +19,8 @@ private:
 
 	string printCharMultipleTimes(char c, int times);
 	
+	int showAllMaps();
+	int newBlueprint();
 	int endProgram();
 	int menu();
 
