@@ -48,6 +48,13 @@ public:
 	~Windmill();
 };
 
+class Solar :public Building
+{
+public:
+	Solar();
+	~Solar();
+};
+
 
 class Residential :public Building
 {

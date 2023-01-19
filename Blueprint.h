@@ -18,7 +18,7 @@ public:
 	Blueprint(int length, int width);
 	~Blueprint();
 
-	Building allBuildingTypes[3];
+	Building allBuildingTypes[4];
 
 	bool validBuildspace(int buildingWidth, int buildingLength, int posWidth, int posLength);
 	bool collidingWithOtherBuilding(int buildingWidth, int buildingLength, int posWidth, int posLength);

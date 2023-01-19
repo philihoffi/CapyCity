@@ -37,6 +37,7 @@ Blueprint::Blueprint(int length, int width)
 	allBuildingTypes[0] = Building(*new EmptySpace());
 	allBuildingTypes[1] = Building(*new Windmill());
 	allBuildingTypes[2] = Building(*new Residential());
+	allBuildingTypes[3] = Building(*new Solar());
 }
 
 Blueprint::~Blueprint()

@@ -105,6 +105,11 @@ Windmill::Windmill() : Building(4, 'W', std::map<Material*, int>{{new Wood(), 4}
 	//this->setPower(100);
 }
 
+Solar::Solar() : Building(3, 'S', std::map<Material*, int>{ {new Wood(), 1}, { new Plastic(), 2 }, { new Metal(), 1 }}, "Solar", 100)
+{
+	//this->setPower(100);
+}
+
 Residential::Residential() : Building(5, 'R', std::map<Material*, int>{ {new Wood(), 1}, { new Plastic(), 11 }, { new Metal(), 8 }}, "Residential",0)
 {
 
