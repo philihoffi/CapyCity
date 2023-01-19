@@ -4,13 +4,16 @@
 class Blueprint
 {
 private:
+	
+
+public:
 	Building*** buildSpace;
 	int length;
 	int width;
 
 	std::string printCharMultipleTimes(char c, int times);
 
-public:
+
 	Building*** getBuildSpace();
 	Blueprint(int length, int width);
 	~Blueprint();
@@ -26,7 +29,7 @@ public:
 	int showMap();
 	std::string getBuildSpaceAsString();
 
-	float getIndicator();
+	double getIndicator();
 
 	Building* getBuilding(char label);
 

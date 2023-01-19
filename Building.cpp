@@ -100,12 +100,12 @@ void Building::setClassname(std::string classname)
 	this->classname = classname;
 }
 
-Windmill::Windmill() : Building(10, 'W', std::map<Material*, int>{{new Wood(), 10}, { new Plastic(), 5}, { new Metal(), 5 }}, "Windmill",100)
+Windmill::Windmill() : Building(4, 'W', std::map<Material*, int>{{new Wood(), 4}, { new Plastic(), 2}, { new Metal(), 1 }}, "Windmill",10)
 {
-	this->setPower(100);
+	//this->setPower(100);
 }
 
-Residential::Residential() : Building(100, 'R', std::map<Material*, int>{ {new Wood(), 1}, { new Plastic(), 11 }, { new Metal(), 8 }}, "Residential",0)
+Residential::Residential() : Building(5, 'R', std::map<Material*, int>{ {new Wood(), 1}, { new Plastic(), 11 }, { new Metal(), 8 }}, "Residential",0)
 {
 
 }

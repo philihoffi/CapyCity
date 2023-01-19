@@ -180,18 +180,29 @@ Building* Blueprint::getBuilding(char label)
 
 bool Blueprint::operator()(Blueprint* other)
 {
+	//return false;
+
 	if (other == nullptr)
 		return false;
-	if (other == this)
-		return false;
-	for (int i = width - 1; i >= 0; i--)
+	//this line is magic dont remove
+	//std::cout << typeid(other).name() << std::endl;
+
+	if (length != other->length || width != other->width)
 	{
-		for (int j = 0; j < length; j++)
+		return false;
+	}
+
+	for (int i = 0; i < length; i++)
+	{
+		for (int j = 0; j < width; j++)
 		{
-			if (getBuildSpace()[i][j]->getLabel() == other->getBuildSpace()[i][j]->getLabel())
+			if (buildSpace[i][j]->getLabel() != other->buildSpace[i][j]->getLabel())
+			{
 				return false;
+			}
 		}
 	}
+
 	return true;
 }
 
@@ -266,9 +277,9 @@ std::string Blueprint::getBuildSpaceAsString()
 	return result.str();
 }
 
-float Blueprint::getIndicator()
+double Blueprint::getIndicator()
 {
-	float k=0, totalPower = 0, totalPrice=0, totalArea=0;
+	double k=0, totalPower = 0, totalPrice=0, totalArea=0;
 
 	for (int i = width - 1; i >= 0; i--)
 	{
@@ -276,6 +287,7 @@ float Blueprint::getIndicator()
 		{
 			totalPower+=getBuildSpace()[i][j]->getPower();
 			totalPrice+=getBuildSpace()[i][j]->getTotalPrice();
+			//Das ist so effizienter als einfach ausrechnen
 			totalArea++;
 			//std::cout << "totalPower" << totalPower << "totalPrice" << totalPrice << "totalArea" << totalArea << std::endl;
 		}
@@ -289,6 +301,8 @@ float Blueprint::getIndicator()
 	else
 		return 0;
 
+	// kann nicht nach k sortieren, da für jeden plan der selbe k-wert rauskommt
 	return k;
+	//return totalPower;
 }
 

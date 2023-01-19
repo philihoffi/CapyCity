@@ -34,15 +34,15 @@ std::string Material::toString()
 	return result.str();
 }
 
-Wood::Wood() :Material(50, "Wood")
+Wood::Wood() :Material(2, "Wood")
 {
 }
 
-Plastic::Plastic() :Material(10, "Plastic")
+Plastic::Plastic() :Material(1, "Plastic")
 {
 }
 
-Metal::Metal() :Material(100, "Metal")
+Metal::Metal() :Material(3, "Metal")
 {
 }
 

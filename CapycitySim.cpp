@@ -1,5 +1,6 @@
 #include "CapycitySim.h"
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
@@ -15,6 +16,10 @@ string CapycitySim::printCharMultipleTimes(char c, int times)
 
 int CapycitySim::showAllMaps()
 {
+	std::sort(blueprints.begin(), blueprints.end(), [](Blueprint* a, Blueprint* b) {
+		return a->getIndicator() < b->getIndicator();
+		});
+
 	std::ostringstream result;
 	for (Blueprint* x : blueprints)
 		result<< "Indicator:"<< x->getIndicator()<<std::endl << x->getBuildSpaceAsString() << std::endl;
@@ -25,11 +30,17 @@ int CapycitySim::showAllMaps()
 
 int CapycitySim::newBlueprint()
 {
+	bool exists = false;
 	for (Blueprint* x : blueprints){
-		cout << " . " << endl;
-		if (!(*currentblueprint)(x)) {
-			blueprints.push_back(currentblueprint);
+		//cout << " . " << (*currentblueprint)(x) << endl;
+		if ((*currentblueprint)(x)) {
+			exists = true;
 		}
+	}
+
+	if(!exists){
+		//cout << "adding new blueprint" << endl;
+		blueprints.push_back(currentblueprint);
 	}
 
 	if (blueprints.empty())
