@@ -40,6 +40,7 @@ int CapycitySim::newBlueprint()
 
 	if(!exists){
 		//cout << "adding new blueprint" << endl;
+
 		blueprints.push_back(currentblueprint);
 	}
 
