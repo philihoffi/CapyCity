@@ -10,6 +10,7 @@ string CapycitySim::printCharMultipleTimes(char c, int times)
 	for (int i = 0; i < times; ++i)
 		s += c;
 	return s;
+
 }
 
 
