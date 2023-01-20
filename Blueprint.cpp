@@ -302,8 +302,10 @@ double Blueprint::getIndicator()
 	else
 		return 0;
 
-	// kann nicht nach k sortieren, da für jeden plan der selbe k-wert rauskommt
-	return k;
-	//return totalPower;
+	// kann nicht nach k sortieren, da für jeden plan der selbe k-wert rauskommt 
+	// doppelt so viele Windräder = doppelt power+price => konstanter wert wenn nur eine 
+	// art gebäude gebaut wird
+	//return k;
+	return totalPower;
 }
 
